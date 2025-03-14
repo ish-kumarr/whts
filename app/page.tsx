@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
-import { CheckCircle2, Lock } from "lucide-react";
+import { Bot, Lock, Sparkles } from "lucide-react";
 import Cookies from "js-cookie";
 
 export default function LoginPage() {
@@ -42,47 +42,56 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-pink-500/20 opacity-50" />
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519681393784-d120267933ba')] bg-cover bg-center opacity-5" />
+    <div className="min-h-screen relative overflow-hidden bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
+      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1635776062127-d379bfcba9f8')] bg-cover bg-center opacity-10" />
       
+      <div className="absolute inset-0">
+        <div className="h-full w-full" style={{ background: 'radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.3) 100%)' }} />
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-md relative"
+        className="relative flex min-h-screen items-center justify-center p-4"
       >
-        <div className="bg-black/40 backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden border border-white/10">
-          <div className="px-8 py-12">
+        <div className="w-full max-w-md">
+          <div className="glass-card rounded-3xl p-8 shadow-2xl">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.1, duration: 0.5 }}
-              className="flex items-center justify-center mb-8"
+              className="flex flex-col items-center mb-8"
             >
-              <div className="h-16 w-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                <CheckCircle2 className="h-8 w-8 text-white" />
+              <div className="h-20 w-20 rounded-2xl bg-white/10 backdrop-blur-xl flex items-center justify-center mb-6 relative">
+                <Bot className="h-10 w-10 text-white" />
+                <motion.div
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.3, type: "spring" }}
+                  className="absolute -top-1 -right-1"
+                >
+                  <Sparkles className="h-5 w-5 text-yellow-300" />
+                </motion.div>
               </div>
-            </motion.div>
 
-            <div className="text-center mb-8">
               <motion.h1
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
-                className="text-3xl font-bold text-white mb-2"
+                className="text-3xl font-bold text-white text-center"
               >
-                Welcome back, Ish Kumar
+                Welcome back, Ish
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
-                className="text-gray-400"
+                className="text-white/80 mt-2 text-center"
               >
-                Access your TaskFlow workspace
+                Your AI secretary is ready to assist you
               </motion.p>
-            </div>
+            </motion.div>
 
             <form onSubmit={handleLogin} className="space-y-6">
               <motion.div
@@ -92,14 +101,14 @@ export default function LoginPage() {
                 className="relative"
               >
                 <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
-                  <Lock className="h-5 w-5 text-gray-500" />
+                  <Lock className="h-5 w-5 text-white/50" />
                 </div>
                 <Input
                   type="password"
-                  placeholder="Enter password"
+                  placeholder="Enter your password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="h-12 pl-11 bg-white/5 border-white/10 text-white placeholder:text-gray-500"
+                  className="h-12 pl-11 bg-white/10 border-white/10 text-white placeholder:text-white/50 rounded-xl"
                   required
                 />
               </motion.div>
@@ -111,16 +120,16 @@ export default function LoginPage() {
               >
                 <Button
                   type="submit"
-                  className="w-full h-12 text-base bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 transition-all duration-200 text-white font-medium"
+                  className="w-full h-12 text-base bg-white hover:bg-white/90 text-indigo-600 font-medium rounded-xl"
                   disabled={isLoading}
                 >
                   {isLoading ? (
                     <span className="flex items-center gap-2">
-                      <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Signing in...
+                      <span className="h-4 w-4 border-2 border-indigo-600/30 border-t-indigo-600 rounded-full animate-spin" />
+                      Authenticating...
                     </span>
                   ) : (
-                    "Sign In"
+                    "Access WhatsAssist"
                   )}
                 </Button>
               </motion.div>
@@ -130,9 +139,9 @@ export default function LoginPage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.5 }}
-              className="mt-8 text-center text-sm text-gray-500"
+              className="mt-8 text-center text-sm text-white/60"
             >
-              Protected by enterprise-grade security
+              Powered by advanced AI technology
             </motion.div>
           </div>
         </div>
